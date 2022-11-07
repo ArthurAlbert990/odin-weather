@@ -1,35 +1,38 @@
 console.log('js working');
 
-let apiKey ='you_api_key'
+let apiKey ='5c968bd90755049f4ce18afee505fe6e'
 
 async function getWeather(cityName){
     try {
         let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`)
         if (response.status==200){
             //console.log(response.json());
-            return response;
+            console.log(response.status);
+            return response.json();
         }
     
-        throw new Error(response)
+        throw await response.json()
 
     } catch (error) {
-        console.log('ERROR ERROR ERROR');
+        console.log('Error:');
+        return error;
     }
-
 }
 
-
-
-
+class City{
+    constructor(city,data){
+        this.name = city;
+        this.weather = data.weather;
+        this.temp = data.main.temp;
+    }
+}
 
 // ********* DOING IT RIGHT NOW: *******
-// handle fetch error, handle it on getWeather
-//  do another function to convert getWeather json to object?
-// how to correctly handle the fetch error?
-//  see the browser message.
-//  good article about handling fetch errors:
-//  https://dmitripavlutin.com/javascript-fetch-async-await/#3-handling-fetch-errors
-
+// writing functions to interface with api
+//  Escrevendo a classe City, construir um objeto passando a cidade
+//  e o resultado de getWeather, como utilizar:
+//  let data = await getWeather('London')
+//  let cidade = new City('London',data) //cidade será construído.
 
 //  ***************** TASKS TO DO: ******************
 
