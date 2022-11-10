@@ -1,6 +1,7 @@
-//import * as dom from "./domFunctions";
+import * as dom from "./pageFunc";
 
-console.log('js working');
+console.log('js working!')
+
 
 let apiKey ='5c968bd90755049f4ce18afee505fe6e'
 
@@ -22,18 +23,17 @@ async function getWeather(cityName){
     }
 }
 
-
 async function fetchWeather(cityName){
     let startTime = performance.now()
     let data = await getWeather(cityName);
     let fetchTime = performance.now()-startTime
 
-    console.log('fetchTime:',fetchTime)
+    console.log('fetchTime:',fetchTime.toFixed(2))
     return {data, fetchTime};
 }
 
-function toCelsius(temp){
-    let tempCelsius = (temp-32)*(5/9)
+function kelvinToCelsius(temp){
+    let tempCelsius = temp-273.15;
     return tempCelsius;
 }
 
@@ -41,26 +41,30 @@ class City{
     constructor(city, data){
         this.name = city;
         this.weather = data.weather;
-        this.temp = data.main.temp;
+        this.tempC = kelvinToCelsius(data.main.temp);
+        this.tempMaxC = kelvinToCelsius(data.main.temp_max);
+        this.tempMinC = kelvinToCelsius(data.main.temp_min);
     }
 }
 
-// ********* DOING IT RIGHT NOW: *******
-// writing functions to interface with api
-//  Como utilizar city:
+
+//  Como utilizar classe City:
 //  e o resultado de getWeather, como utilizar:
 //  let data = await fetchWeather('London')
 //  let cidade = new City('London',data['data']) //cidade será construído.
 
 
+// ********* DOING IT RIGHT NOW: ********
+// Refactoring PageFunc.js, updatePage() function.
+//  Needs to display fetch time too.
+
+
 //  ***************** TASKS TO DO: ******************
 // *** At beginning, only console log the info:
 
-// write the functions to interface with the API.
-//      function to convert the data from °f to c
-//      
+// write the functions to interface with the API.[ok]
 
-// Add a search field for user to input the location.
+// Add a search field for user to input the location.[ok]
 
 // add html to display the info.
 
