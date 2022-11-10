@@ -5,7 +5,7 @@ console.log('js working!')
 
 let apiKey ='5c968bd90755049f4ce18afee505fe6e'
 
-async function getWeather(cityName){
+export async function getWeather(cityName){
     try {
         
         let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`)
@@ -23,7 +23,7 @@ async function getWeather(cityName){
     }
 }
 
-async function fetchWeather(cityName){
+export async function fetchWeather(cityName){
     let startTime = performance.now()
     let data = await getWeather(cityName);
     let fetchTime = performance.now()-startTime
@@ -32,12 +32,12 @@ async function fetchWeather(cityName){
     return {data, fetchTime};
 }
 
-function kelvinToCelsius(temp){
-    let tempCelsius = temp-273.15;
+export function kelvinToCelsius(temp){
+    let tempCelsius = (temp-273.15).toFixed(0);
     return tempCelsius;
 }
 
-class City{
+export class City{
     constructor(city, data){
         this.name = city;
         this.weather = data.weather;
