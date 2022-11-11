@@ -26,9 +26,9 @@ export async function getWeather(cityName){
 export async function fetchWeather(cityName){
     let startTime = performance.now()
     let data = await getWeather(cityName);
-    let fetchTime = performance.now()-startTime
+    let fetchTime = ((performance.now()-startTime).toFixed(0))
 
-    console.log('fetchTime:',fetchTime.toFixed(2))
+    console.log('fetchTime:',fetchTime)
     return {data, fetchTime};
 }
 
@@ -55,20 +55,10 @@ export class City{
 
 
 // ********* DOING IT RIGHT NOW: ********
-// Refactoring PageFunc.js, updatePage() function.
-//  Needs to display fetch time too.
+// Style the page.
 
 
 //  ***************** TASKS TO DO: ******************
-// *** At beginning, only console log the info:
-
-// write the functions to interface with the API.[ok]
-
-// Add a search field for user to input the location.[ok]
-
-// add html to display the info.
-
 // style it.
-
-// [OK]add a load component to display the time the user searched
-// and when received the info from the api. 
+// add a loading that display between when the fetch is running:
+// some type of loading animation.

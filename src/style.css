@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;400;700&display=swap');
+
+
 /* reset */
 *{
     padding: 0;
@@ -6,5 +9,76 @@
 }
 
 *{
-    color: red;
+    font-family: 'Noto Sans', sans-serif;
 }
+
+
+.container{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5em;
+
+    color: white;
+    background: linear-gradient(135deg, rgba(8,36,79,1) 0%, rgba(19,76,181,1) 45%, rgba(11,66,171,1) 100%);
+
+    font-size: 1.2em;
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3em;
+}
+
+.temp{
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.tempMinMax{
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+}
+
+.popup{
+    display: block;
+    position: absolute;
+    bottom: 0;
+
+    font-size: 0.7em;
+
+    background-color: rgb(0, 170, 0);
+    padding: 0.1em 1em;
+    border-radius: 0.5em 0.5em 0 0;
+}
+
+.searchBar{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width: auto;
+}
+.searchField{
+    padding: 0.5em;
+    background: white;
+    width: 100%;
+    border: none;
+}
+.searchField:focus{
+    outline: none;
+}
+.searchBtn{
+    background: inherit;
+    border: none;
+    cursor: pointer;
+    padding: 0.5em;
+    font-size: 1em;
+}
+
