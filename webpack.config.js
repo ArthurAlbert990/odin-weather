@@ -7,6 +7,7 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
+    assetModuleFilename: "icons/[hash][ext][query]",
     clean: true,
   },
   watchOptions: {
@@ -16,10 +17,20 @@ module.exports = {
     modules: [path.resolve(__dirname, 'node_modules'), 'node_modules']
   },
   module: {
-  rules:[{
-    test: /\.css$/i,
-    use: ["style-loader", "css-loader"],
-  }],},
+  rules:[
+    {
+      test: /\.css$/i,
+      use: ["style-loader", "css-loader"],
+    },
+    {
+      test: /\.png$/i,
+      type: 'asset/resource',
+      generator: {
+        filename:'icons/[hash][ext][query]',
+      }
+    }
+  ],
+  },
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',

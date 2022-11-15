@@ -14,6 +14,10 @@ export async function getWeather(cityName){
             console.log(response.status);
             return response.json();
         }
+
+        else if(response.status == 404){
+            alert('City not found, try again!')
+        }
     
         throw await response.json()
 

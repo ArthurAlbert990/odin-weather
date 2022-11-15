@@ -11,6 +11,8 @@ const tempMax = document.querySelector('.tempMax');
 const searchField = document.querySelector('.searchField');
 const searchBtn = document.querySelector('.searchBtn');
 const popupText = document.querySelector('.pText');
+const cardChildren = document.querySelectorAll('.card>*')
+const weatherIcon = document.querySelector('.weatherIcon>img')
 
 //event listeners
 searchBtn.addEventListener('click',searchCity);
@@ -19,16 +21,23 @@ searchBtn.addEventListener('click',searchCity);
 //functions
 //
 async function searchCity(e){
+    toggleAnimation();
     console.log(e);
     let searchInput = searchField.value;
     console.log(`Search: ${searchInput}`);
     //let data = await api.getWeather(searchInput);
     let data = await api.fetchWeather(searchInput)
-    console.log(data)
-    let cidade =  new api.City(searchInput,data['data']);
-    updatePage(cidade,data['fetchTime']);
+    if (data['data']['cod']==404){
+        console.log('404, abort.');
+        toggleAnimation();
+    } else{
+        console.log(data)
+        let cidade =  new api.City(searchInput,data['data']);
+        updatePage(cidade,data['fetchTime']);
 
-    return cidade;
+        return cidade;
+    }
+    
 }
 
 function updatePage(cidade,fetchTime){
@@ -39,4 +48,34 @@ function updatePage(cidade,fetchTime){
     tempMin.textContent = cidade.tempMinC+'°C';
     tempMax.textContent = cidade.tempMaxC+'°C';
     popupText.textContent = fetchTime+'ms';
+
+    let weatherDescription = cidade.weather[0].description;
+
+    if (weatherDescription.includes('rain')) {
+        console.log('weather icon> rain')
+        weatherIcon.src = './icons/storm.png'
+        weatherIcon.style.height = '5rem';
+        weatherIcon.style.visibility = 'visible';
+
+    } else if(weatherDescription.includes('clouds')) {
+        console.log('weather icon> clouds');
+        weatherIcon.src = './icons/storm.png'
+        weatherIcon.style.height = '5rem';
+        weatherIcon.style.visibility = 'visible';
+
+    } else if(weatherDescription.includes('sun')) {
+        console.log('weather icon> sun');
+        weatherIcon.src = './icons/sun.png'
+        weatherIcon.style.height = '5rem';
+        weatherIcon.style.visibility = 'visible';
+    }
+
+    toggleAnimation()
+}
+
+function toggleAnimation(){
+    console.log('toggle');
+    for(let child of cardChildren){
+        child.classList.toggle('skeleton')
+    }
 }
